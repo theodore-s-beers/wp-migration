@@ -59,7 +59,7 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
 
       ```sql
       CREATE DATABASE new_db;
-      GRANT ALL PRIVILEGES ON new_db.\* TO 'dbuser'@'localhost' IDENTIFIED BY 'password';
+      GRANT ALL PRIVILEGES ON new_db.* TO 'dbuser'@'localhost' IDENTIFIED BY 'password';
       ```
 
     - Import the database backup (you will be prompted for the password that you just
