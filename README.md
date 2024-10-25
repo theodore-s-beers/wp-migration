@@ -1,4 +1,4 @@
-# Steps to deploy a WordPress site copy on a new server and domain
+# Cloning a WordPress site to a new server and domain
 
 I'm writing this largely for myself, to document the process that I followed to clone a
 WordPress site from one hosting provider to another. In particular, I'm getting ready to
