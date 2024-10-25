@@ -37,12 +37,11 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
       `mv /var/www/html/wp-content /var/www/html/wp-content-old`
     - Then we can do our transfer, e.g.,
       `rsync -avz /path/to/wp-content/ user@ip:/var/www/html/wp-content/`
-    - The destination directory will (afaik) be created if it doesn't exist.
-    - Second, we'll move the database backup (`.sql` file) to the new server. In this
-      case, the destination location is arbitrary, since we'll just be using `mysql` to
-      import the backup into a new database running on the new server. I placed the
-      `.sql` file in the home directory on the server:
-      `rsync -avz /path/to/backup.sql user@ip:~`
+    - The destination directory will (afaik) be created by `rsync` if it doesn't exist.
+    - Second, we'll move the database backup (`.sql` file) to the new server. For this,
+      the destination location is arbitrary, since we'll just be using `mysql` to import
+      the backup into a new database running on the new server. I placed the `.sql` file
+      in the home directory: `rsync -avz /path/to/backup.sql user@ip:~`
 
 4.  Set file permissions
 
@@ -51,12 +50,12 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
     - If you used `rsync` in "archive mode" (with the `-a` flag), you should not need to
       fix any permissions. In fact, you may not even need to update the ownership—though
       I did. But do verify that `wp-content` and subsidiary directories have `755`
-      permissions, and files have `644`.
+      permissions, and that files have `644`.
 
 5.  Move backup into new database
 
     - Log into MySQL on the server and create a new database (with a new database user,
-      incl. credentials):
+      including credentials):
 
       ```sql
       CREATE DATABASE new_db;
@@ -81,7 +80,7 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
 
     - Open the `wp-config.php` file on the new server:
       `sudo vim /var/www/html/wp-config.php`
-    - Update database details to reflect the new database name, user, and password:
+    - Update the database details to reflect the new database name, user, and password:
 
       ```php
       define( 'DB_NAME', 'new_db' );
@@ -103,7 +102,7 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
     - Visit (e.g.) `test.bar.dev` and ensure the site is functioning properly.
     - Test media, plugins, and content to verify that everything was transferred.
     - Run a broken link checker and/or check for any hardcoded URLs still pointing to
-      the old site URL (e.g., `foo.com`).
+      the old site (e.g., `foo.com`).
 
 10. Clean up
 
