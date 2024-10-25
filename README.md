@@ -12,19 +12,20 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
       to request and download a full backup of site data. It came in a `.tar.gz` bundle,
       most of whose contents proved irrelevant.
     - What ended up being necessary were two things: the `wp-content` directory, and the
-      `.sql` file of the main site database.
+      `.sql` file backup of the main site database.
     - I could easily imagine more complex setups in which other directories/files would
-      need to be backed up and transferred, but in this case, if I didn't have cPanel, I
-      could have just used `rsync` or similar to transfer the key pieces.
+      need to be backed up and transferred. But in this case, if I didn't have cPanel, I
+      could have just used `mysqldump` for the database, then `rsync` or similar to
+      transfer stuff.
 
 2.  Set up new server
 
-    - Provision a VPS (e.g., a DigitalOcean droplet)
+    - Provision a VPS (e.g., a DigitalOcean droplet).
     - Set up WordPress on the new server, using something pre-configured (or manually if
-      necessary)
-    - Point the new domain (e.g., `test.bar.dev`) to the server's IP address
+      necessary).
+    - Point the new domain (e.g., `test.bar.dev`) to the server's IP address.
     - Ensure there's a good SSL certificate via
-      [Let's Encrypt](https://letsencrypt.org/)
+      [Let's Encrypt](https://letsencrypt.org/).
 
 3.  Transfer files
 
@@ -91,17 +92,18 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
 
 8.  Regenerate permalinks
 
-    - Log into WordPress _in a browser_ at (e.g.) `test.bar.dev/wp-admin`
+    - Log into WordPress _in a browser_ at (e.g.) `test.bar.dev/wp-admin`.
     - The admin credentials should be the same as on the original site (e.g., at
-      `foo.com/wp-admin`)
-    - Go to Settings > Permalinks and click Save Changes to regenerate `.htaccess` rules
+      `foo.com/wp-admin`).
+    - Go to Settings > Permalinks and click Save Changes to regenerate `.htaccess`
+      rules.
 
 9.  Verify and test site
 
-    - Visit (e.g.) `test.bar.dev` and ensure the site is functioning properly
-    - Test media, plugins, and content to verify that everything was transferred
+    - Visit (e.g.) `test.bar.dev` and ensure the site is functioning properly.
+    - Test media, plugins, and content to verify that everything was transferred.
     - Run a broken link checker and/or check for any hardcoded URLs still pointing to
-      the old site URL (e.g., `foo.com`)
+      the old site URL (e.g., `foo.com`).
 
 10. Clean up
 
