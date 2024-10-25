@@ -57,12 +57,12 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
     - Log into MySQL on the server and create a new database (with a new database user,
       incl. credentials):
 
-          ```sql
-          CREATE DATABASE new_db;
-          GRANT ALL PRIVILEGES ON new_db.\* TO 'dbuser'@'localhost' IDENTIFIED BY 'password';
-          FLUSH PRIVILEGES;
-          EXIT;
-          ```
+      ```sql
+      CREATE DATABASE new_db;
+      GRANT ALL PRIVILEGES ON new_db.\* TO 'dbuser'@'localhost' IDENTIFIED BY 'password';
+      FLUSH PRIVILEGES;
+      EXIT;
+      ```
 
     - Import the database backup (you will be prompted for the password that you just
       set): `mysql -u dbuser -p new_db < /path/on/server/backup.sql`
@@ -72,11 +72,11 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
     - Update URLs in the `wp_options` table (or similar; check the prefix!) to reflect
       the new domain:
 
-          ```sql
-          USE new_db;
-          UPDATE wp_options SET option_value = 'https://test.bar.dev' WHERE option_name = 'siteurl';
-          UPDATE wp_options SET option_value = 'https://test.bar.dev' WHERE option_name = 'home';
-          ```
+      ```sql
+      USE new_db;
+      UPDATE wp_options SET option_value = 'https://test.bar.dev' WHERE option_name = 'siteurl';
+      UPDATE wp_options SET option_value = 'https://test.bar.dev' WHERE option_name = 'home';
+      ```
 
 7.  Configure WordPress to use new database
 
@@ -84,12 +84,12 @@ got a clone of the site up and running at <https://mem.t6e.dev/>.
       `sudo vim /var/www/html/wp-config.php`
     - Update database details to reflect the new database name, user, and password:
 
-          ```php
-          define( 'DB_NAME', 'new_db' );
-          define( 'DB_USER', 'dbuser' );
-          define( 'DB_PASSWORD', 'password' );
-          define( 'DB_HOST', 'localhost' );
-          ```
+      ```php
+      define( 'DB_NAME', 'new_db' );
+      define( 'DB_USER', 'dbuser' );
+      define( 'DB_PASSWORD', 'password' );
+      define( 'DB_HOST', 'localhost' );
+      ```
 
 8.  Regenerate permalinks
 
